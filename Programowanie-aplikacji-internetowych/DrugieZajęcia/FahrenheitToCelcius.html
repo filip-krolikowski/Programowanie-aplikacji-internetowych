@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fahrenheit Converter</title>
+</head>
+<style>
+    body {
+        font-family: Arial;
+        background-color: aquamarine;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        background-color: aliceblue;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 300px;
+    }
+
+    .input {
+        padding: 8px;
+        width: 80%;
+        margin-top: 10px;
+        border: 1px solid #000000;
+        border-radius: 5px;
+        cursor: grab;
+    }
+
+    .button {
+        margin-top: 10px;
+        padding: 10px 15px;
+        background-color:cadetblue;
+        color: white;
+        cursor: grab;
+    }
+
+    .button:hover {
+        background-color:darkslategrey;
+    }
+
+    #result {
+        margin-top: 20px;
+        font-size: 15px;
+    }
+</style>
+<body>
+    <div class="container">
+        <h2>Fahrenheit -> Celsius</h2>
+
+        <form>
+            Insert temperature in ℉:<br>
+            <input type="range" id="fahrenheit" min="-50" max="150" value="0" oninput="convertTemperature()">
+            <p id="indicator">0 ℉</p>
+        </form>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            let fv = document.getElementById("fahrenheit").value;
+
+            document.getElementById("indicator").innerHTML = fv + " ℉";
+
+            let cv = (fv - 32) * (5 / 9);
+            document.getElementById("result").innerHTML = "Temperature in ℃: " + cv.toFixed(2);
+
+            let percent = (fv + 50) / (150 + 50); 
+            percent = Math.max(0, Math.min(1, percent));
+
+            let r = Math.round(255 * percent);
+            let b = Math.round(255 * (1 - percent));
+            document.body.style.backgroundColor = `rgb(${r}, 0, ${b})`;
+
+        }
+    </script>
+</body>
+</html>
